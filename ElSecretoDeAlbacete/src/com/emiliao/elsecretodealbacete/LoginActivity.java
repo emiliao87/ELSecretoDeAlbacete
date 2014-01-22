@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class Login extends Activity{
+public class LoginActivity extends Activity{
 	
 	private Button btCancelar; 
 
