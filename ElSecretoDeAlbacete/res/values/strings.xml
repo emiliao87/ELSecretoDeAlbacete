@@ -6,5 +6,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="Cancelar">Cancelar</string>
     <string name="Aceptar">Aceptar</string>
+    <string name="title_activity_maps">MapsActivity</string>
 
 </resources>
