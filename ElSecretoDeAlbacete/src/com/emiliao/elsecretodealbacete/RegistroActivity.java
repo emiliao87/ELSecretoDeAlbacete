@@ -26,6 +26,11 @@ public class RegistroActivity extends Activity {
 		btAceptar = (Button) findViewById(R.id.btAceptarReg);
 		btCancelar = (Button) findViewById(R.id.btCancelarReg);
 		
+		/**
+		 * Método del botón Aceptar, que pasa otra vez a la Actvity Login si los datos
+		 * de registro son correctos y se registran exitósamente.
+		 * 
+		 */
 		btAceptar.setOnClickListener(new OnClickListener() {
 			
 			@Override
@@ -42,6 +47,9 @@ public class RegistroActivity extends Activity {
 			}
 		});
 		
+		/**
+		 * Cierra la actividad actual.
+		 */
 		btCancelar.setOnClickListener(new OnClickListener() {
 			
 			@Override
