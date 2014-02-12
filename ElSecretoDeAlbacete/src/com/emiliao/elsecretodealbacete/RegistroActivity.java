@@ -1,6 +1,7 @@
 package com.emiliao.elsecretodealbacete;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -23,20 +24,29 @@ public class RegistroActivity extends Activity {
 		password2 = (EditText) findViewById(R.id.txtPassword2);
 		
 		btAceptar = (Button) findViewById(R.id.btAceptarReg);
+		btCancelar = (Button) findViewById(R.id.btCancelarReg);
 		
 		btAceptar.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
-				if(password1.getText().equals(password2.getText())){
+				if(password1.getText().toString().equals(password2.getText().toString())){
 					//Acepta el registro.
+					lanzarAceptar(null);
 				}
 				else{
 					Toast toast = Toast.makeText(getApplicationContext(),
-				                    "Las contraseñas no coinciden", Toast.LENGTH_SHORT);
+				                    "Las contraseñas no coinciden.", Toast.LENGTH_SHORT);
 				    toast.show();
 				}
-				
+			}
+		});
+		
+		btCancelar.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				finish();
 			}
 		});
 		
@@ -47,6 +57,12 @@ public class RegistroActivity extends Activity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.registro, menu);
 		return true;
+	}
+	
+	public void lanzarAceptar(View view){
+		Intent i = new Intent(this, LoginActivity.class);
+		finish();
+		startActivity(i);
 	}
 
 }
