@@ -3,29 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-    <EditText
-        android:id="@+id/txUsuario"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="150dp"
-        android:ems="10"
-        android:hint="Usuario" />
-
-    <EditText
-        android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword" >
-
-        <requestFocus />
-    </EditText>
-
     <Button
         android:id="@+id/btAceptar"
         android:layout_width="wrap_content"
@@ -43,5 +20,35 @@
         android:layout_alignBottom="@+id/btAceptar"
         android:layout_alignRight="@+id/txtNombre"
         android:text="@string/Cancelar" />
+
+    <EditText
+        android:id="@+id/txUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/txtNombre"
+        android:layout_marginTop="85dp"
+        android:ems="10"
+        android:hint="Usuario" />
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txUsuario"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword" />
+
+    <Button
+        android:id="@+id/btRegistro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btAceptar"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="41dp"
+        android:text="Registrarse" />
 
 </RelativeLayout>
