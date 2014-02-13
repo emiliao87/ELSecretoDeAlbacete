@@ -7,7 +7,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 
-public class LoginActivity extends Activity{
+public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 	
 	private Button btCancelar, btAceptar, btRegistro;
 	private View view;
@@ -20,6 +20,10 @@ public class LoginActivity extends Activity{
 		btCancelar = (Button) findViewById(R.id.btCancelar);
 		btAceptar = (Button) findViewById(R.id.btAceptar);
 		btRegistro = (Button) findViewById(R.id.btRegistro);
+		
+		/*btAceptar.setOnClickListener(this);
+		btCancelar.setOnClickListener(this);
+		btRegistro.setOnClickListener(this);*/
 		
 		btAceptar.setOnClickListener(new OnClickListener() {
 			
@@ -58,5 +62,25 @@ public class LoginActivity extends Activity{
 		Intent i = new Intent(this, RegistroActivity.class);
 		startActivity(i);
 	}
-	
-}
+	}
+
+	/*@Override
+	public void onClick(View v) {
+		Intent i;
+		switch(view.getId()){
+		case R.id.btAceptarReg:
+			i = new Intent(this, JuegoActivity.class);
+			finish();
+			startActivity(i);
+			break;
+		case R.id.btCancelarReg:
+			finish();
+			break;
+		case R.id.btRegistro:
+			i = new Intent(this, RegistroActivity.class);
+			finish();
+			startActivity(i);
+			break;
+		}
+		
+	}*/

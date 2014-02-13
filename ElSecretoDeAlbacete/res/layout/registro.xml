@@ -9,25 +9,11 @@
     tools:context=".RegistroActivity" >
 
     <EditText
-        android:id="@+id/txtNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginLeft="34dp"
-        android:layout_marginTop="54dp"
-        android:ems="10"
-        android:hint="Nombre"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
-    <EditText
         android:id="@+id/txtApellido"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtNombre"
+        android:layout_alignLeft="@+id/txtPassword1"
+        android:layout_alignRight="@+id/txtEmail"
         android:layout_below="@+id/txtNombre"
         android:layout_marginTop="22dp"
         android:ems="10"
@@ -40,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/txtPassword2"
         android:layout_below="@+id/txtEmail"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="18dp"
         android:ems="10"
         android:hint="Contraseña"
@@ -60,9 +47,10 @@
         android:id="@+id/txtEmail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPassword1"
+        android:layout_alignLeft="@id/txtPassword1"
         android:layout_alignRight="@+id/txtPassword1"
         android:layout_below="@+id/txtApellido"
+        android:layout_centerHorizontal="true"
         android:layout_marginTop="28dp"
         android:ems="10"
         android:hint="E-mail"
@@ -83,7 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btAceptarReg"
         android:layout_alignBottom="@+id/btAceptarReg"
-        android:layout_alignRight="@+id/txtApellido"
+        android:layout_alignRight="@id/txtPassword2"
         android:text="Cancelar" />
 
     <TextView
@@ -93,5 +81,17 @@
         android:layout_centerHorizontal="true"
         android:text="Registro"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <EditText
+        android:id="@+id/txtNombre"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/txtApellido"
+        android:layout_alignRight="@+id/txtApellido"
+        android:layout_below="@id/lbRegistro"
+        android:layout_marginTop="28dp"
+        android:ems="10"
+        android:hint="Nombre"
+        android:inputType="textPersonName" />
 
 </RelativeLayout>
