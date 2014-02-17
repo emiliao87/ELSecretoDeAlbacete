@@ -29,7 +29,6 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 			
 			@Override
 			public void onClick(View v) {
-
 				lanzarAceptar(null);
 			}
 		});
@@ -38,7 +37,6 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 			
 			@Override
 			public void onClick(View v) {
-				
 				finish(); //Uso finish para matar la actividad actual y volver a la anterior.
 			}
 		});
@@ -60,6 +58,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 	
 	public void lanzarRegistro(View view){
 		Intent i = new Intent(this, RegistroActivity.class);
+		finish();
 		startActivity(i);
 	}
 	}

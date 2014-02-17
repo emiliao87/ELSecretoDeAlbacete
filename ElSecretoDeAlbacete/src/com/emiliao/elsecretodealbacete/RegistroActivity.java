@@ -41,7 +41,7 @@ public class RegistroActivity extends Activity {
 				}
 				else{
 					Toast toast = Toast.makeText(getApplicationContext(),
-				                    "Las contraseñas no coinciden.", Toast.LENGTH_SHORT);
+				                    "¡Las contraseñas no coinciden!", Toast.LENGTH_SHORT);
 				    toast.show();
 				}
 			}
@@ -57,7 +57,6 @@ public class RegistroActivity extends Activity {
 				finish();
 			}
 		});
-		
 	}
 
 	@Override

@@ -7,10 +7,14 @@ import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class JuegoActivity extends Activity{
 	
 	private Button btMaps;
+	private Button btSeguir;
+	private TextView lbAcertijo;
+	private String[] result;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,8 @@ public class JuegoActivity extends Activity{
 		setContentView(R.layout.juego);
 		
 		btMaps = (Button) findViewById(R.id.btMaps);
+		btSeguir = (Button) findViewById(R.id.btSeguir);
+		lbAcertijo = (TextView) findViewById(R.id.lbAcertijo);
 		
 		btMaps.setOnClickListener(new OnClickListener() {
 			
@@ -25,6 +31,17 @@ public class JuegoActivity extends Activity{
 			public void onClick(View v) {
 				
 				lanzarMaps(null);
+			}
+		});
+		
+		btSeguir.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent i = new Intent("com.google.zxing.client.android.SCAN");
+				i.putExtra("SCAN MODE", "QR_CODE_MODE");
+				startActivityForResult(i, 0);
+				
 			}
 		});
 	}
@@ -38,8 +55,25 @@ public class JuegoActivity extends Activity{
 	
 	public void lanzarMaps(View view){
 		Intent i = new Intent(this, MapsActivity.class);
-		
 		startActivity(i);
 	}
+	
+	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+	 	   if (requestCode == 0) {
+	 	      if (resultCode == RESULT_OK) {
+	 	         String contents = intent.getStringExtra("SCAN_RESULT");
+	 	         String r="";
+	 	         result = contents.split("/");
+	 	         for(int i=0;i<result.length;i++){
+	 	        	 r = r + result[i] + "\n";
+	 	         }
+	 	         lbAcertijo.setText(r); //Poner el contenido del QR en el texto del acertijo.
+	 	         
+	 	         // Handle successful scan
+	 	      } else if (resultCode == RESULT_CANCELED) {
+	 	         // Handle cancel
+	 	      }
+	 	   }
+	 	}
 	
 }
