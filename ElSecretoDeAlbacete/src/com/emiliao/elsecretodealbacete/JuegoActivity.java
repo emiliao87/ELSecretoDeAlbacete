@@ -40,8 +40,7 @@ public class JuegoActivity extends Activity{
 			public void onClick(View v) {
 				Intent i = new Intent("com.google.zxing.client.android.SCAN");
 				i.putExtra("SCAN MODE", "QR_CODE_MODE");
-				startActivityForResult(i, 0);
-				
+				startActivityForResult(i,0);
 			}
 		});
 	}
@@ -49,7 +48,7 @@ public class JuegoActivity extends Activity{
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.juego, menu); // Me falta crearlo para meter las opciones pensadas.
+		getMenuInflater().inflate(R.menu.juego, menu); // Me falta crear el menú para meter las opciones pensadas.
 		return true;
 	}
 	
@@ -63,12 +62,15 @@ public class JuegoActivity extends Activity{
 	 	      if (resultCode == RESULT_OK) {
 	 	         String contents = intent.getStringExtra("SCAN_RESULT");
 	 	         String r="";
+	 	         /**
+	 	          * Divide el string resultado en campos determinados por "/", y cada
+	 	          * campo lo mete en una posción del vector "result".
+	 	          */
 	 	         result = contents.split("/");
 	 	         for(int i=0;i<result.length;i++){
 	 	        	 r = r + result[i] + "\n";
 	 	         }
-	 	         lbAcertijo.setText(r); //Poner el contenido del QR en el texto del acertijo.
-	 	         
+	 	         lbAcertijo.setText(r); //Poner el contenido del QR en el texto del acertijo (temporal de prueba).
 	 	         // Handle successful scan
 	 	      } else if (resultCode == RESULT_CANCELED) {
 	 	         // Handle cancel
