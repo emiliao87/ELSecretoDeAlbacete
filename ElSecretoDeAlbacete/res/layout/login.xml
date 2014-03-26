@@ -7,8 +7,8 @@
         android:id="@+id/btAceptar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtNombre"
-        android:layout_below="@+id/txtNombre"
+        android:layout_alignLeft="@+id/txtPassword"
+        android:layout_below="@+id/txtPassword"
         android:layout_marginTop="46dp"
         android:text="@string/Aceptar" />
 
@@ -18,24 +18,24 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btAceptar"
         android:layout_alignBottom="@+id/btAceptar"
-        android:layout_alignRight="@+id/txtNombre"
+        android:layout_alignRight="@+id/txtPassword"
         android:text="@string/Cancelar" />
 
     <EditText
-        android:id="@+id/txUsuario"
+        android:id="@+id/txtLoginUsuario"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/txtNombre"
+        android:layout_alignRight="@+id/txtPassword"
         android:layout_marginTop="85dp"
         android:ems="10"
         android:hint="Usuario" />
 
     <EditText
-        android:id="@+id/txtNombre"
+        android:id="@+id/txtPassword"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/txUsuario"
+        android:layout_below="@+id/txtLoginUsuario"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:ems="10"

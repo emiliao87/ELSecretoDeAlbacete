@@ -2,6 +2,7 @@ package com.emiliao.elsecretodealbacete;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -15,6 +16,9 @@ public class JuegoActivity extends Activity{
 	private Button btSeguir;
 	private TextView lbAcertijo;
 	private String[] result;
+	private Intent maps = null;
+	
+	private String dir_actual, dir_destino;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +28,8 @@ public class JuegoActivity extends Activity{
 		btMaps = (Button) findViewById(R.id.btMaps);
 		btSeguir = (Button) findViewById(R.id.btSeguir);
 		lbAcertijo = (TextView) findViewById(R.id.lbAcertijo);
+		
+		btMaps.setEnabled(false);
 		
 		btMaps.setOnClickListener(new OnClickListener() {
 			
@@ -53,8 +59,10 @@ public class JuegoActivity extends Activity{
 	}
 	
 	public void lanzarMaps(View view){
-		Intent i = new Intent(this, MapsActivity.class);
-		startActivity(i);
+		//Intent i = new Intent(this, MapsActivity.class);
+		//startActivity(i);
+		
+		startActivity(maps);
 	}
 	
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
@@ -70,8 +78,26 @@ public class JuegoActivity extends Activity{
 	 	         for(int i=0;i<result.length;i++){
 	 	        	 r = r + result[i] + "\n";
 	 	         }
+	 	         
+	 	         dir_actual = result[1];
+	 	         dir_destino = result[2];
+	 	    	 	         
 	 	         lbAcertijo.setText(r); //Poner el contenido del QR en el texto del acertijo (temporal de prueba).
 	 	         // Handle successful scan
+	 	         
+	 	         btMaps.setEnabled(true);
+	 	         
+	 	         //Formato QRcode: NºQR/dir_actual/dir_destino/Acertijo/(Nº de QR en el primer QR)
+	 	         //				resul[0]/resul[1]/resul[2]/resul[3]/resul[4]
+	 	         maps = new Intent(Intent.ACTION_VIEW,
+	 	         Uri.parse("http://maps.google.com/maps?" 
+	 	         + "saddr=" + dir_actual + "&daddr=" + dir_destino
+	 	         + "&hl=es&sspn=0.001241,0.002642&geocode=FVnbUgId963j_w%3BFcnXUgIdharj_w&t=h&dirflg=w&mra=ls&z=19" ));
+
+	 	         maps.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+	 	        		
+	 	         startActivity(maps);
+	 	        		
 	 	      } else if (resultCode == RESULT_CANCELED) {
 	 	         // Handle cancel
 	 	      }

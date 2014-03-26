@@ -8,70 +8,13 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".RegistroActivity" >
 
-    <EditText
-        android:id="@+id/txtApellido"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPassword1"
-        android:layout_alignRight="@+id/txtEmail"
-        android:layout_below="@+id/txtNombre"
-        android:layout_marginTop="22dp"
-        android:ems="10"
-        android:hint="Apellido"
-        android:inputType="textPersonName" />
-
-    <EditText
-        android:id="@+id/txtPassword1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPassword2"
-        android:layout_below="@+id/txtEmail"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="18dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/txtPassword2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/txtPassword1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="Confirma Contraseña"
-        android:inputType="textPassword" />
-
-    <EditText
-        android:id="@+id/txtEmail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/txtPassword1"
-        android:layout_alignRight="@+id/txtPassword1"
-        android:layout_below="@+id/txtApellido"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="28dp"
-        android:ems="10"
-        android:hint="E-mail"
-        android:inputType="textEmailAddress" />
-
-    <Button
-        android:id="@+id/btAceptarReg"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/txtPassword2"
-        android:layout_below="@+id/txtPassword2"
-        android:layout_marginTop="31dp"
-        android:text="Aceptar" />
-
     <Button
         android:id="@+id/btCancelarReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/btAceptarReg"
         android:layout_alignBottom="@+id/btAceptarReg"
-        android:layout_alignRight="@id/txtPassword2"
+        android:layout_alignRight="@+id/txtPassword2"
         android:text="Cancelar" />
 
     <TextView
@@ -82,16 +25,59 @@
         android:text="Registro"
         android:textAppearance="?android:attr/textAppearanceLarge" />
 
-    <EditText
-        android:id="@+id/txtNombre"
+    <Button
+        android:id="@+id/btAceptarReg"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@id/txtApellido"
-        android:layout_alignRight="@+id/txtApellido"
-        android:layout_below="@id/lbRegistro"
-        android:layout_marginTop="28dp"
+        android:layout_alignLeft="@+id/txtPassword2"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="36dp"
+        android:text="Aceptar" />
+
+    <EditText
+        android:id="@+id/txtPassword2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtPassword1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="37dp"
         android:ems="10"
-        android:hint="Nombre"
+        android:hint="Confirma Contraseña"
+        android:inputType="textPassword" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/txtEmail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtPassword1"
+        android:layout_alignLeft="@+id/txtPassword1"
+        android:layout_marginBottom="30dp"
+        android:ems="10"
+        android:hint="E-mail"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:id="@+id/txtUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/txtEmail"
+        android:layout_alignLeft="@+id/txtEmail"
+        android:layout_marginBottom="29dp"
+        android:ems="10"
+        android:hint="Usuario"
         android:inputType="textPersonName" />
+
+    <EditText
+        android:id="@+id/txtPassword1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/txtPassword2"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="Contraseña"
+        android:inputType="textPassword" />
 
 </RelativeLayout>
