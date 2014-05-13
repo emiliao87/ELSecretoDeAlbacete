@@ -1,5 +1,8 @@
 package com.emiliao.elsecretodealbacete;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import org.apache.http.HttpResponse;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpPost;
@@ -108,11 +111,12 @@ public class RegistroActivity extends Activity {
 					//Construimos el objeto persona en formato JSON
 					JSONObject dato = new JSONObject();
 					
+					String usuario = hash(params[0]);
+					String password = hash(params[1]);
 					
-					
-					dato.put("Id", "Perfecto");
+					dato.put("Id", usuario);
 					dato.put("Usuario", params[0]);
-					dato.put("Password", params[1]);
+					dato.put("Password", password);
 					dato.put("Email", params[2]);
 					dato.put("Puntuacion", 0);					
 					
@@ -146,5 +150,26 @@ public class RegistroActivity extends Activity {
 		    	}
 		    }
 		}
+		
+		public static String hash(String string) {
+			 
+	        try {
+	            //.s. Create MD5 Hash
+	            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
+	            digest.update(string.getBytes());
+	            byte messageDigest[] = digest.digest();
+	 
+	            //.s. Create Hex String
+	            StringBuffer hexString = new StringBuffer();
+	            for (int i=0; i<messageDigest.length; i++)
+	                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
+	            return hexString.toString();
+	 
+	        } catch (NoSuchAlgorithmException e) {
+	            e.printStackTrace();
+	        }
+	 
+	        return string.replaceAll("[.:/,%?#&=]","");
+	    }
 
 }
