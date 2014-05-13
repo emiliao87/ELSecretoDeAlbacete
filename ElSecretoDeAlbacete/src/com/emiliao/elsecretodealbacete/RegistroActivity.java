@@ -49,18 +49,19 @@ public class RegistroActivity extends Activity {
 			@Override
 			public void onClick(View v) {
 				if(password1.getText().toString().equals(password2.getText().toString())){
-					
+					try{
 					WSInsertar tarea = new WSInsertar();
-					tarea.execute(usuario.getText().toString(),	email.getText().toString(),	password1.getText().toString());
+					tarea.execute(usuario.getText().toString(),
+								  password1.getText().toString(),
+								  email.getText().toString());
 					
 					//Acepta el registro.
 					lanzarAceptar(null);
-				}
-				else{
-					Toast toast = Toast.makeText(getApplicationContext(),
-				                    "¡Las contraseñas no coinciden!", Toast.LENGTH_SHORT);
-				    toast.show();
-				}
+					}
+					catch(Exception e){
+						Toast.makeText(getApplicationContext(), "No ha insertado", Toast.LENGTH_SHORT).show();
+					}
+			}
 			}
 		});
 		
@@ -99,17 +100,21 @@ public class RegistroActivity extends Activity {
 		    	HttpClient httpClient = new DefaultHttpClient();
 		        
 		    	//Cambiar segun el web service
-				HttpPost post = new HttpPost("http://ElSecretoDeAlbacete.somee.com/Api/Usuarios/Usuario");
+				HttpPost post = new HttpPost("http://elsecreto.somee.com/Api/Personas/Persona");
 				post.setHeader("content-type", "application/json");
 				
 				try
 		        {
-					//Construimos el objeto usuario en formato JSON
+					//Construimos el objeto persona en formato JSON
 					JSONObject dato = new JSONObject();
 					
-					dato.put("usuario", params[0]);
-					dato.put("email", params[1]);
-					dato.put("password", params[2]);
+					
+					
+					dato.put("Id", "Perfecto");
+					dato.put("Usuario", params[0]);
+					dato.put("Password", params[1]);
+					dato.put("Email", params[2]);
+					dato.put("Puntuacion", 0);					
 					
 					StringEntity entity = new StringEntity(dato.toString());
 					post.setEntity(entity);
@@ -117,12 +122,15 @@ public class RegistroActivity extends Activity {
 		        	HttpResponse resp = httpClient.execute(post);
 		        	String respStr = EntityUtils.toString(resp.getEntity());
 		        	
-		        	if(!respStr.equals("true"))
+		        	if(!respStr.equals("true")){
+		        		Toast.makeText(getApplicationContext(), "No se ha insertado", Toast.LENGTH_SHORT).show();
 		        		resul = false;
+		        	}
 		        }
 		        catch(Exception ex)
 		        {
 		        	Log.e("ServicioRest","Error!", ex);
+		        	Toast.makeText(getApplicationContext(), "Error con servicio web", Toast.LENGTH_SHORT).show();
 		        	resul = false;
 		        }
 		 

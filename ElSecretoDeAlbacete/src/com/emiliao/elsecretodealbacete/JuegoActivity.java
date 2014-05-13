@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class JuegoActivity extends Activity{
 	
@@ -44,9 +45,17 @@ public class JuegoActivity extends Activity{
 			
 			@Override
 			public void onClick(View v) {
+				try{
 				Intent i = new Intent("com.google.zxing.client.android.SCAN");
 				i.putExtra("SCAN MODE", "QR_CODE_MODE");
 				startActivityForResult(i,0);
+				}
+				catch(Exception e){
+					Intent i = new Intent(android.content.Intent.ACTION_VIEW);
+					i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.google.zxing.client.android&hl=es"));
+					Toast.makeText(getApplicationContext(), "¡Necesitas un escaner QR para usar esta opción!", Toast.LENGTH_LONG).show();
+					startActivity(i);
+				}
 			}
 		});
 	}
@@ -87,8 +96,8 @@ public class JuegoActivity extends Activity{
 	 	         
 	 	         btMaps.setEnabled(true);
 	 	         
-	 	         //Formato QRcode: NºQR/dir_actual/dir_destino/Acertijo/(Nº de QR en el primer QR)
-	 	         //				resul[0]/resul[1]/resul[2]/resul[3]/resul[4]
+	 	         /*Formato QRcode: NºQR/dir_actual/dir_destino/Acertijo/(Nº de QR en el primer QR)
+	 	         				resul[0]/resul[1]/resul[2]/resul[3]/resul[4]  */
 	 	         maps = new Intent(Intent.ACTION_VIEW,
 	 	         Uri.parse("http://maps.google.com/maps?" 
 	 	         + "saddr=" + dir_actual + "&daddr=" + dir_destino
@@ -103,5 +112,4 @@ public class JuegoActivity extends Activity{
 	 	      }
 	 	   }
 	 	}
-	
 }
