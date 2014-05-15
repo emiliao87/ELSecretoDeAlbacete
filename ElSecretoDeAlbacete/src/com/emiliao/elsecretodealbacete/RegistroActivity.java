@@ -51,20 +51,30 @@ public class RegistroActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				if(password1.getText().toString().equals(password2.getText().toString())){
-					try{
-					WSInsertar tarea = new WSInsertar();
-					tarea.execute(usuario.getText().toString(),
-								  password1.getText().toString(),
-								  email.getText().toString());
+				if(usuario.getText().toString().isEmpty() | password1.getText().toString().isEmpty() 
+					| password2.getText().toString().isEmpty() | email.getText().toString().isEmpty()){
 					
-					//Acepta el registro.
-					lanzarAceptar(null);
+					Toast.makeText(getApplicationContext(), "¡Rellene todos los campos!", Toast.LENGTH_SHORT).show();
+					
+				}else{
+					if(password1.getText().toString().equals(password2.getText().toString())){
+						try{
+							WSInsertar tarea = new WSInsertar();
+							tarea.execute(usuario.getText().toString(),
+										  password1.getText().toString(),
+										  email.getText().toString());
+							
+							//Acepta el registro.
+							lanzarAceptar(null);
+						}
+						catch(Exception e){
+							Toast.makeText(getApplicationContext(), "No ha insertado", Toast.LENGTH_SHORT).show();
+						}
 					}
-					catch(Exception e){
-						Toast.makeText(getApplicationContext(), "No ha insertado", Toast.LENGTH_SHORT).show();
+					else{
+						Toast.makeText(getApplicationContext(), "¡Las contraseñas no coinciden!", Toast.LENGTH_SHORT).show();
 					}
-			}
+				}
 			}
 		});
 		
@@ -111,8 +121,8 @@ public class RegistroActivity extends Activity {
 					//Construimos el objeto persona en formato JSON
 					JSONObject dato = new JSONObject();
 					
-					String usuario = hash(params[0]);
-					String password = hash(params[1]);
+					String usuario = MD5.hash(params[0]);
+					String password = MD5.hash(params[1]);
 					
 					dato.put("Id", usuario);
 					dato.put("Usuario", params[0]);
@@ -150,26 +160,5 @@ public class RegistroActivity extends Activity {
 		    	}
 		    }
 		}
-		
-		public static String hash(String string) {
-			 
-	        try {
-	            //.s. Create MD5 Hash
-	            MessageDigest digest = java.security.MessageDigest.getInstance("MD5");
-	            digest.update(string.getBytes());
-	            byte messageDigest[] = digest.digest();
-	 
-	            //.s. Create Hex String
-	            StringBuffer hexString = new StringBuffer();
-	            for (int i=0; i<messageDigest.length; i++)
-	                hexString.append(Integer.toHexString(0xFF & messageDigest[i]));
-	            return hexString.toString();
-	 
-	        } catch (NoSuchAlgorithmException e) {
-	            e.printStackTrace();
-	        }
-	 
-	        return string.replaceAll("[.:/,%?#&=]","");
-	    }
 
 }
