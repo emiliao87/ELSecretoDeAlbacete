@@ -85,7 +85,7 @@ public class RegistroActivity extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				finish();
+				lanzarCancelar(null);
 			}
 		});
 	}
@@ -98,6 +98,12 @@ public class RegistroActivity extends Activity {
 	}
 	
 	public void lanzarAceptar(View view){
+		Intent i = new Intent(this, LoginActivity.class);
+		finish();
+		startActivity(i);
+	}
+	
+	public void lanzarCancelar(View view){
 		Intent i = new Intent(this, LoginActivity.class);
 		finish();
 		startActivity(i);

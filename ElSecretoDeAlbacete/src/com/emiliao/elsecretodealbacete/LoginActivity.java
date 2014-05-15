@@ -40,7 +40,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 			
 			@Override
 			public void onClick(View v) {
-		//Comprobar este metodo, como loguear!!
+		
 					WSObtener tarea = new WSObtener();
 					tarea.execute(usu.getText().toString(), pass.getText().toString());
 			}
@@ -113,7 +113,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 		        }
 		        catch(Exception ex)
 		        {
-		        	Toast.makeText(getApplicationContext(), "!El usuario no existe¡", Toast.LENGTH_SHORT).show();
+		        	//Toast.makeText(getApplicationContext(), "!El usuario no existe¡", Toast.LENGTH_SHORT).show();
 		        	//Log.e("ServicioRest","Error!", ex);
 		        	resul = false;
 		        }

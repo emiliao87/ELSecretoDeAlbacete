@@ -1,8 +1,15 @@
 package com.emiliao.elsecretodealbacete;
 
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
+import org.json.JSONObject;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
@@ -89,15 +96,17 @@ public class JuegoActivity extends Activity{
 	 	         }
 	 	         
 	 	         dir_actual = result[1];
-	 	         dir_destino = result[2];
-	 	    	 	         
-	 	         lbAcertijo.setText(r); //Poner el contenido del QR en el texto del acertijo (temporal de prueba).
+	 	         	         
+	 	         //lbAcertijo.setText(r); //Poner el contenido del QR en el texto del acertijo (temporal de prueba).
 	 	         // Handle successful scan
+	 	         
+	 	        WSObtener tarea = new WSObtener();
+				tarea.execute(result[0].toString());
 	 	         
 	 	         btMaps.setEnabled(true);
 	 	         
-	 	         /*Formato QRcode: NºQR/dir_actual/dir_destino/Acertijo/(Nº de QR en el primer QR)
-	 	         				resul[0]/resul[1]/resul[2]/resul[3]/resul[4]  */
+	 	         /*Formato QRcode: NºQR/dir_actual
+	 	         				resul[0]/resul[1]  
 	 	         maps = new Intent(Intent.ACTION_VIEW,
 	 	         Uri.parse("http://maps.google.com/maps?" 
 	 	         + "saddr=" + dir_actual + "&daddr=" + dir_destino
@@ -105,11 +114,77 @@ public class JuegoActivity extends Activity{
 
 	 	         maps.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
 	 	        		
-	 	         startActivity(maps);
+	 	         startActivity(maps);*/
 	 	        		
 	 	      } else if (resultCode == RESULT_CANCELED) {
 	 	         // Handle cancel
 	 	      }
 	 	   }
 	 	}
+	
+	//Tarea Asíncrona para llamar al WS de consulta en segundo plano
+			private class WSObtener extends AsyncTask<String,Integer,Boolean> {
+				
+				private String id;
+				private Double lat;
+				private Double lon;
+				private String acertijo;
+				private int nEti;
+				 
+			    protected Boolean doInBackground(String... params) {
+			    	
+			    	boolean resul = true;
+			    	id = params[0];
+			    	
+			    	HttpClient httpClient = new DefaultHttpClient();
+					
+					HttpGet del = 
+							new HttpGet("http://elsecreto.somee.com/Api/Etiquetas/Etiqueta/" + id);
+					
+					del.setHeader("content-type", "application/json");
+					
+					try
+			        {			
+			        	HttpResponse resp = httpClient.execute(del);
+			        	String respStr = EntityUtils.toString(resp.getEntity());
+			        	
+			        	JSONObject respJSON = new JSONObject(respStr);
+			        	
+			        	lat = respJSON.getDouble("Latitud");
+			        	lon = respJSON.getDouble("Longitud");
+			        	acertijo = respJSON.getString("Acertijo");
+			        	nEti = respJSON.getInt("nEtiquetas");
+			        }
+			        catch(Exception ex)
+			        {
+			        	Toast.makeText(getApplicationContext(), "Fallo en la llamada", Toast.LENGTH_SHORT).show();
+			        	//Log.e("ServicioRest","Error!", ex);
+			        	resul = false;
+			        }
+			 
+			        return resul;
+			    }
+			    
+			    protected void onPostExecute(Boolean result) {
+			    	
+			    	if (result)
+			    	{
+			    		/*Formato QRcode: NºQR/dir_actual/dir_destino/Acertijo/(Nº de QR en el primer QR)
+	         				resul[0]/resul[1]/resul[2]/resul[3]/resul[4]  */
+				         maps = new Intent(Intent.ACTION_VIEW,				         
+				         Uri.parse("https://www.google.com/maps/dir/"+dir_actual+"/"+lat+","+lon+"/@"+dir_actual+",17z/data=!3m1!4b1!4m4!4m3!1m0!1m0!3e2?hl=es" ));
+			
+				         //Sirve para antiguo maps, ya que son data Uri distintos a partir de la versión 7.0 .
+				         /*Uri.parse("http://maps.google.com/maps?" 
+				         + "saddr=" + dir_actual + "&daddr=" + lat.toString() + "," + lon.toString()
+				         + "&hl=es&sspn=0.001241,0.002642&geocode=FVnbUgId963j_w%3BFcnXUgIdharj_w&t=h&dirflg=w&mra=ls&z=19" ));*/
+				         
+				         maps.setClassName("com.google.android.apps.maps","com.google.android.maps.MapsActivity");
+				        		
+				         lbAcertijo.setText(acertijo+"\n"+lat+"\n"+lon+"\n"+nEti);
+				         startActivity(maps);
+			    		
+			    	}
+			    }
+			}
 }
