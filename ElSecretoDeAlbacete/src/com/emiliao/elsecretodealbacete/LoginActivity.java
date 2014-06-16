@@ -136,6 +136,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 		    			lanzarAceptar(null);
 		    		}
 		    		else{
+		    			pb.setVisibility(4);
 		    			Toast.makeText(getApplicationContext(), "¡Usuario y contraseña no coinciden!", Toast.LENGTH_SHORT).show();
 		    			usu.setText(_usuario);
 		    			pass.setHint("Contraseña");
