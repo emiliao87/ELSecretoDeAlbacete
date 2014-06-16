@@ -139,7 +139,7 @@ public class JuegoActivity extends Activity{
 			    	HttpClient httpClient = new DefaultHttpClient();
 					
 					HttpGet del = 
-							new HttpGet("http://elsecreto.somee.com/Api/Etiquetas/Etiqueta/" + id);
+							new HttpGet("http://elsecretode.somee.com/Api/Etiquetas/Etiqueta/" + id);
 					
 					del.setHeader("content-type", "application/json");
 					
@@ -169,8 +169,7 @@ public class JuegoActivity extends Activity{
 			    	
 			    	if (result)
 			    	{
-			    		/*Formato QRcode: NºQR/dir_actual/dir_destino/Acertijo/(Nº de QR en el primer QR)
-	         				resul[0]/resul[1]/resul[2]/resul[3]/resul[4]  */
+			    		// Formato QRcode: NºQR/dir_actual
 				         maps = new Intent(Intent.ACTION_VIEW,				         
 				         Uri.parse("https://www.google.com/maps/dir/"+dir_actual+"/"+lat+","+lon+"/@"+dir_actual+",17z/data=!3m1!4b1!4m4!4m3!1m0!1m0!3e2?hl=es" ));
 			
@@ -183,7 +182,9 @@ public class JuegoActivity extends Activity{
 				        		
 				         lbAcertijo.setText(acertijo+"\n"+lat+"\n"+lon+"\n"+nEti);
 				         startActivity(maps);
-			    		
+			    	}
+			    	else{
+			    		Toast.makeText(getApplicationContext(), "Etiqueta dañada o incorrecta", Toast.LENGTH_SHORT);
 			    	}
 			    }
 			}

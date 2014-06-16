@@ -119,7 +119,7 @@ public class RegistroActivity extends Activity {
 		    	HttpClient httpClient = new DefaultHttpClient();
 		        
 		    	//Cambiar segun el web service
-				HttpPost post = new HttpPost("http://elsecreto.somee.com/Api/Personas/Persona");
+				HttpPost post = new HttpPost("http://elsecretode.somee.com/Api/Personas/Persona");
 				post.setHeader("content-type", "application/json");
 				
 				try

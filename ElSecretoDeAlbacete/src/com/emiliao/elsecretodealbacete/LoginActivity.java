@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 public class LoginActivity extends Activity{ /*implements OnClickListener{*/
@@ -23,6 +24,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 	private Button btCancelar, btAceptar, btRegistro;
 	private View view;
 	private EditText usu, pass;
+	private ProgressBar pb;
 
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -36,13 +38,17 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 		usu = (EditText) findViewById(R.id.txtLoginUsuario);
 		pass = (EditText) findViewById(R.id.txtPassword);
 		
+		pb = (ProgressBar) findViewById(R.id.progressLogin);
+		
 		btAceptar.setOnClickListener(new OnClickListener() {
 			
 			@Override
 			public void onClick(View v) {
 		
 					WSObtener tarea = new WSObtener();
+										
 					tarea.execute(usu.getText().toString(), pass.getText().toString());
+					pb.setVisibility(0);
 			}
 		});
 		
@@ -65,6 +71,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 	
 	public void lanzarAceptar(View view){
 		Intent i = new Intent(this, JuegoActivity.class);
+		pb.setVisibility(4);
 		finish();
 		startActivity(i);
 	}
@@ -96,7 +103,7 @@ public class LoginActivity extends Activity{ /*implements OnClickListener{*/
 				_usuario = params[0];
 				
 				HttpGet del = 
-						new HttpGet("http://elsecreto.somee.com/Api/Personas/Persona/" + _id);
+						new HttpGet("http://elsecretode.somee.com/Api/Personas/Persona/" + _id);
 				
 				del.setHeader("content-type", "application/json");
 				
